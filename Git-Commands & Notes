@@ -1,0 +1,378 @@
+1. pwd : Current location dikhata hai
+
+2. ls : Folder ke andar kya files hain
+
+3. cd folderName : Folder change karna , aur back jane ke liye  cd ..
+
+4. git init : Git start karna project me
+
+5. git status : Sabse important command
+
+6. git add fileName.ext : Files staging area me bhejna, agar sab files bhejne hain toh, git add .
+
+7. git commit -m "message" : Save snapshot - Project ka ek version save karta hai.
+
+8. git remote add origin https://github.com/saraftejas111/demo.git  :  apke git repo ko github ke repo se jodne ka process
+
+9. git push :  apke commit kiye hue files github ke repo par bhejne ka process,
+
+10. git push -u origin main :  first time agar project bhej rahe ho toh yeh command se kiya jayega fir aap badme sirf git push kar sakte ho
+
+   agar master branch par ho toh branch change karke main par jaana hain
+
+11. git branch -m master main :  branch change ya rename karne ke liye
+
+12. git log : Pichle commits dikhata hai
+
+13. git config --global user.name  ( to check or set name )
+
+14. git config --global user.email ( to check or set email )
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Ab main tumhe poora company flow (TL → Developers → Merge) ekdum step-by-step de raha hoon.
+Har step me:
+
+Command
+Matlab (kyon use karte hain)
+Result kya aayega
+
+Ye exactly wahi process hai jo real teams follow karti hain.
+
+Phase 1 — TL Project Create Karega
+Step 1 — Project folder banana
+
+mkdir company-project
+cd company-project
+
+Matlab:
+Naya project folder create karna aur usme enter karna.
+
+Result:
+Project local system me ban gaya.
+
+Example location:
+
+D:\company-project
+
+
+Step 2 — Git initialize
+git init
+
+Matlab:
+Project ko Git tracking me lana.
+
+Result:
+
+Initialized empty Git repository
+
+Hidden .git folder create ho jata hai.
+
+
+
+Step 3 — Project files add karna
+
+Example:
+
+Login.java
+EmployeeService.java
+
+Check status:
+
+git status
+
+Result:
+
+Untracked files:
+Login.java
+EmployeeService.java
+
+
+
+Step 4 — Files staging me bhejna
+git add .
+
+Matlab:
+Sab files commit ke liye ready.
+
+Check:
+
+git status
+
+Result:
+
+Changes to be committed
+Step 5 — First commit
+git commit -m "Initial project setup"
+
+Matlab:
+Project ka first version save karna.
+
+Result:
+
+2 files changed
+
+
+
+Step 6 — Default branch set karna
+git branch -M main
+
+Matlab:
+Main branch ko project ki primary branch banana.
+
+
+
+Step 7 — GitHub repo connect karna
+
+Example:
+
+git remote add origin https://github.com/company/company-project.git
+
+Check:
+
+git remote -v
+
+Result:
+
+origin https://github.com/company/company-project.git
+
+
+Step 8 — GitHub par push
+git push -u origin main
+
+Matlab:
+Local project GitHub par upload.
+
+Result:
+
+Branch main set to track origin/main
+
+Ab TL ka kaam ho gaya.
+
+
+
+
+Phase 2 — Developer Project Download Karega
+
+Step 9 — Clone
+
+Developer karega:
+
+git clone https://github.com/company/company-project.git
+
+Matlab:
+GitHub se poora project download.
+
+Project kaha download hota hai?
+
+Jis folder me command run kiya hai waha.
+
+Example:
+
+D:\projects\
+
+To project aayega:
+
+D:\projects\company-project
+
+
+
+Step 10 — Project open karna (IDE)
+
+VS Code:
+
+cd company-project
+code .
+
+Eclipse:
+
+Import Existing Project
+
+Project directly dikhega.
+
+
+
+Phase 3 — Developer Work Start Karega
+Step 11 — Latest code lena
+git pull origin main
+
+Matlab:
+Latest code lena.
+
+Result:
+
+Already up to date
+Step 12 — Feature branch banana
+
+Example:
+Login feature developer.
+
+git checkout -b login-feature
+
+Matlab:
+New branch create + switch.
+
+Result:
+
+Switched to a new branch 'login-feature'
+
+Check:
+
+git branch
+
+Output:
+
+main
+* login-feature
+Phase 4 — Developer Code Karega
+
+Developer login module add karega.
+
+Check changes:
+
+git status
+
+Output:
+
+modified: LoginService.java
+
+
+Step 13 — Changes add
+git add .
+Step 14 — Commit
+git commit -m "Login feature added"
+
+Result:
+
+1 file changed
+Step 15 — Push branch
+git push origin login-feature
+
+Result:
+
+New branch pushed to GitHub
+
+Ab TL ko branch dikhegi.
+
+Phase 5 — TL Check Karega Branches
+git branch -a
+
+Result:
+
+main
+login-feature
+remotes/origin/main
+remotes/origin/login-feature
+
+Matlab:
+Team me ek developer login feature par kaam kar raha hai.
+
+
+
+Phase 6 — TL Login Feature Dekhega
+
+Switch branch:
+
+git checkout login-feature
+
+Check commits:
+
+git log --oneline
+
+Result:
+
+a45c1 Login feature added
+b21d3 Initial project setup
+Phase 7 — TL Main Branch Me Merge Karega
+
+Switch main:
+
+git checkout main
+
+Merge:
+
+git merge login-feature
+
+Result:
+
+Fast-forward
+LoginService.java added
+
+Matlab:
+Login feature main branch me aa gaya.
+
+Phase 8 — Confirm Merge
+git log --oneline
+
+Result:
+
+a45c1 Login feature added
+b21d3 Initial project setup
+Phase 9 — TL Branch Delete Karega
+
+Feature complete ho gaya.
+
+git branch -d login-feature
+
+Result:
+
+Deleted branch login-feature
+Real Company Flow (Short Version)
+
+TL:
+
+create project
+push to github
+assign tasks
+review PR
+merge
+
+Developer:
+
+clone
+pull
+create branch
+code
+commit
+push
+PR
+Branch Structure (Real World)
+main → production
+develop → testing
+feature branches → developers
+
+Example:
+
+main
+ |
+develop
+ |
+ |--- login-feature
+ |--- add-employee
+ |--- update-employee
+ |--- delete-employee
+Sabse Important Commands (Daily Use)
+
+Check branch
+
+git branch
+
+Switch branch
+
+git checkout branch-name
+
+See commits
+
+git log --oneline
+
+Merge
+
+git merge branch-name
+
+Latest code
+
+git pull
+
+Push code
+
+git push
